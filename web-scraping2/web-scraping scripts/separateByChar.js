@@ -1,0 +1,62 @@
+// write a function that separates a line by a character '•'
+// https://www.footlocker.com/category/shoes.html?query=Shoes%3Arelevance
+function separateByChar(file, char) {
+  var fs = require("fs");
+  var lines = fs.readFileSync(file).toString().split("\r\n");
+  for (var i = 0; i < lines.length; i++) {
+    lines[i] = lines[i].split(char);
+  }
+  console.log(lines);
+}
+
+separateByChar("category.txt", "•");
+
+//category.txt
+// Men's•White/White/White
+// Women's•White/Black/Sail
+// Boys' Grade School•White/White
+// Men's•Black/Black/Black
+// Men's•White/Black/White
+// Men's•White/Grey
+// Men's•White/Yellow/Green
+// Boys' Grade School•White/Midnight Navy
+// Men's•Purple/Gold/White
+// Men's•Bone/Bone
+// Women's•White/Pink
+// Men's•Orange/White
+// Men's•Brown/Grey/White
+// Men's•Grey/White
+// Women's•White/Grey
+// Women's•White/Black
+// Men's•Black/Grey/Red
+// Men's•White/Red/Blue
+// Men's•Grey/Blue
+// Men's•Black/Grey/Multi
+// Boys' Grade School•Phantom/Lt Iron Grey/White
+// Women's•White/White
+// Boys' Grade School•White/Red/Black
+// Men's•Sea Salt/Carolina/Yellow
+// Men's•Black/White/White
+// Boys' Grade School•Black/Orange/Beige
+// Men's•Wheat Nubuck/Wheat
+// Boys' Grade School•Black
+// Men's•White/Navy/Maroon
+// Women's•White/White
+// Women's•White/Black
+// Men's•Black/Black/Dark Grey
+// Men's•Black/Black/Black
+// Boys' Grade School•Grey
+// Women's•Black/White
+// Boys' Grade School•White/Pink Foam
+// Men's•Black/Red/Black
+// Men's•Jet Black/Black
+// Men's•Stucco/Grey
+// Women's•Olive/Olive
+// Men's•Silver/Green/Grey
+// Women's•White/Red/Black
+// Boys' Toddler•Yellow/Black/White
+// Women's•Sea Salt/Incense
+// Women's•Chestnut/Chestnut
+// Boys' Toddler•White/Red/Black
+// Men's•Multi
+// Women's•Beige

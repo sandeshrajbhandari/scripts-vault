@@ -1,0 +1,17 @@
+// write a function that downloads images from links in a imageLinks.txt file without using request libarary.
+
+function downloadImages() {
+  var fs = require("fs");
+  var request = require("requests");
+  var lines = fs.readFileSync("imageLinks.txt").toString().split("\r\n");
+  //   console.log(request);
+  //     console.log(lines);
+  let link =
+    "https://images.footlocker.com/is/image/EBFL2/W2288111?wid=245&hei=245&fmt=png-alpha";
+  request(link).pipe(fs.createWriteStream("imagetest" + ".jpg"));
+  //   for (var i = 0; i < lines.length; i++) {
+  //     request(lines[i]).pipe(fs.createWriteStream("image" + i + ".jpg"));
+  //   }
+}
+
+downloadImages();
