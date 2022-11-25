@@ -3,13 +3,13 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs/promises");
 
-async function start() {
+async function start(pageLink, mainArr) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(
-    "https://gharjagganepal.com/properties-business-for-sale-exchange/land-sale/",
+    "https://gharjagganepal.com/properties-business-for-sale-exchange/house-sale/",
     {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle0",
     }
   );
 
@@ -22,11 +22,36 @@ async function start() {
     ).map((x) => x.textContent);
     let priceArr = Array.from(
       document.querySelectorAll('span[itemprop= "price"]')
-    ).map((x) => x.textContent.replaceAll(",", "").replace("Rs", ""));
+    ).map((x) => x.textContent.replaceAll(",", "").replace("Rs", "")
+    );
+
+    let landArr = Array.from(
+      document.querySelectorAll('div.built_up_area')
+    ).map((x) => {
+      x
+      // let regexp = /([a-z]+)*([^>]*)/;
+      // let landText = x.textContent // 10Dhur, 6AAna, 1kaththa
+      // let result = str.match(regexp);
+    }
+    )
+    let bedrooms
+    let searchingHouse = true;
+
+    if (searchingHouse) {
+      bedrooms = Array.from(
+        document.querySelectorAll("div.bedroom>span.value")
+      ).map((x) => x.textContent);
+      bathrooms = Array.from(
+        document.querySelectorAll("div.bathroom>span.value")
+      ).map((x) => x.textContent);
+
+      return { imgArr, locArr, priceArr, landArr, bedrooms, bathrooms };
+    }
 
     // let test = document.querySelector("span[itemprop='price']").textContent;
-    return { imgArr, locArr, priceArr };
+    return { imgArr, locArr, priceArr, landArr };
   });
+  await console.log(names.bedrooms)
   //await fs.writeFile("names.txt", names.join("\r\n"));
   //   let { imgArr, locArr, pricArr } = names;
 
@@ -41,7 +66,7 @@ async function start() {
     return csvText;
   }
   let csvText = arrayToCsv(names);
-  require("fs").writeFileSync("FILE.CSV", csvText);
+  require("fs").writeFileSync("FILE2.CSV", csvText);
 
   //   await page.click("#clickme");
   //   const clickedData = await page.$eval("#data", (el) => el.textContent);
