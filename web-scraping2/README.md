@@ -9,3 +9,8 @@ scrape-loop.js main logic derived from
 https://flaviocopes.com/puppeteer-scraping/#:~:text=Here%E2%80%99s%20the%20full%20source%20code%3A
 
 end goal is to output a csv or json file to use in webapps or wordpress sites for portfolio.
+
+## commit : real estate site scrape script changed, multipage support
+- changed scrape-property script and added multpage script for iterating over many pages.
+- error for area assignment when land area is missing from an item.
+- 
