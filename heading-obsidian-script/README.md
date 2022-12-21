@@ -15,3 +15,7 @@ TURNS INTO:
 #### १. सबैभन्दा बढी पटक सगरमाथाको शिखरमा पुग्ने आरोही को हुन् ?
 
 -> कामिरिता शेर्पा (२६औँ पटक, २०७९ वैशाख)
+
+## headingAppend.py for fastbook Q/A.
+checks for line starting with number and . eg. `1.`.
+`if re.match(r"^(\d+\.)", line):`
