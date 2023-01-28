@@ -4,26 +4,48 @@ const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-async function findTotal(kva, type) {
-  const databaseId = process.env.NOTION_DATABASE_ID_METAL;
+async function findTotal(resourceName) {
+  const databaseId = process.env.NOTION_DATABASE_ID_KNOWLEDGE_HUB;
   const response = await notion.databases.query({
     database_id: databaseId,
     filter: {
-      property: "KVA",
-      select: {
-        equals: kva,
-      },
+      and: [
+        {
+          property: "Name",
+          rich_text: {
+            contains: "text",
+          },
+        },
+        // {
+        //   property: "Resources",
+        //   relation: {
+        //     contains: resourceName,
+        //   },
+        // },
+        // {
+        //   property: "Type",
+        //   select: {
+        //     equals: type,
+        //   },
+        // },
+      ],
     },
+    // sorts: [
+    //   {
+    //     property: 'marks',
+    //     direction: 'ascending',
+    //   },
+    // ],
   });
   let sum = 0;
   //response.results.map((item) => sum = sum + (item.properties.marks.number))
   //console.log(response.results[1].properties.Output.number);
   //console.log(response.results.length)
-  response.results.forEach(
-    (item) => (sum = sum + item.properties.Output.number)
-  );
+  // response.results.forEach(
+  //   (item) => (sum = sum + item.properties.Output.number)
+  // );
   //console.log(sum)
-  return sum;
+  return response; //change to sum
 }
 
 async function kvaTable() {
@@ -51,7 +73,16 @@ async function kvaTable() {
     console.log();
   }
 }
-kvaTable();
+
+// kvaTable();
+
+// let total1 = findTotal("After Effects");
+async function test() {
+  let total1 = await findTotal("0e5ce7475c964702b8147d4956c82743");
+  console.log(total1);
+}
+test();
+
 // (async function test() {
 //     console.log("TEST 1")
 //     console.log (await findTotal("300", "Tank"));
